@@ -1,0 +1,669 @@
+---
+title: "Leader-line Example"
+format:
+  revealjs:
+    width: 1920
+    height: 1080
+    html-math-method: katex
+    include-in-header: 
+      - text: '<script src="https://cdnjs.cloudflare.com/ajax/libs/leader-line/1.0.7/leader-line.min.js"></script>'
+revealjs-plugins:
+  - leader-line
+---
+
+
+## Leaderline
+
+
+
+
+:::{#box1 style="width:200px; height:200px; background-color:red; position:absolute; top:100px; left:0" }
+:::
+:::{#box2 style="width:200px; height:200px; background-color:green;position:absolute; top:100px; left:400px;" }
+:::
+
+
+:::{#list .incremental style="position:absolute; top:400px"}
+
+- Here is some text.
+- You can put the [target text]{#target} within a span to select it.
+- You can point to any element you can select using CSS selector.
+
+:::
+
+[]{.leaderline start='#box1' end='#box2' start-socket='top' lineid='example'}
+[]{.leaderline start='#box2' end='#target' index=1 end-border-style='color:red;' lineid="line1"}
+[]{.leaderline start="#box2" end='#list ul li:nth-child(3)' index=2 end-socket="right"}
+[]{.leaderline .setAttribute lineid='example' color='blue' end-socket='bottom' index=0 caption-label='an arrow' label-style='color:red; fontSize:20'}
+
+## LeaderLine
+
+```{js}
+
+function highlightCode(id, line, text, color, index=-1, spanid=''){
+  var fragment= ""
+  if(index>-1){
+    fragment = ' class="fragment" data-fragment-index="' + index + '" ';
+  }
+  if(spanid!=''){
+    spanid=' id="' + spanid +'" '
+  } 
+  
+  document.querySelector(id +" code > span:nth-child(" + line +")").innerHTML = document.querySelector(id +" code > span:nth-child(" + line +")").innerHTML.replace(text,
+      '<span style="position:relative"> <span ' + spanid + ' style="position:absolute; left:0.5em; background-color:' + color + ';"' + fragment +' >' + text + '</span>' + text + '</span>')
+  
+}
+
+```
+
+
+
+
+
+
+:::{.text}
+
+- This extension is a wrapper for [LeaderLine](https://github.com/anseki/leader-line).
+- It draw a line between two elements.
+  - The code converts `span` objects to `leader-line` objects.
+- The extension is intended for [__Quarto__](https://quarto.org/), but can be used in other forms by just including the script into the Reveal.js.
+- `[]{ .leaderline start="#A" end="#B"  }` becomes:
+
+:::
+
+
+::::{.container style="heigh:500px; width:100%; position:relative;"}
+
+
+
+:::{#A style="width:100px; height:100px; background-color:red; position:absolute; left:5%; top:0;"}
+
+:::
+
+:::{#B style="width:100px; height:100px; background-color:red; position:absolute; right:5%; top:0;"}
+
+:::
+
+::::
+
+[]{ .leaderline start="#A" end="#B"  }
+        
+
+## Example
+
+
+:::{.decTree style="height:50%;"}
+
+
+```{r}
+
+```
+
+
+```{=html}
+<div class="decTreeInner" id="tree" style="display:flex; width:100%">
+  <div class="decTreeVertical level1" style="min-width:1em; max-width:20%; height:100%;">
+    <div class="spreadContent level1" style="height:100%;">
+      <div class="node" id="init">A</div>
+    </div>
+  </div>
+  <div class="spreadContent levelB1" style="width:20%"></div>
+  <div class="decTreeVertical level2" style="min-width:1em; max-width:20%; height:100%;">
+    <div class="spreadContent level2" style="height:100%;">
+      <div class="node" id="left">Left</div>
+      <div class="node" id="right">Right</div>
+    </div>
+  </div>
+  <div class="spreadContent levelB2" style="width:20%"></div>
+  <div class="decTreeVertical level3" style="min-width:1em; max-width:20%; height:100%;">
+    <div class="spreadContent level3" style="height:100%;">
+      <div class="node" id="upleft">100</div>
+      <div class="node" id="downleft">300</div>
+      <div class="node" id="upright">300</div>
+      <div class="node" id="downright">100</div>
+    </div>
+  </div>
+
+</div>
+```
+
+
+:::
+
+[]{.leaderline start="#tree #init" end="#tree #left" path="straight" lineid="left"}
+[]{.leaderline start="#tree #init" end="#tree #right" path="straight" lineid="right"}
+[]{.leaderline start="#tree #right" end="#tree #upright" path-label="up" lineid="rightup"}
+[]{.leaderline start="#tree #right" end="#tree #downright" path-label="down" lineid="rightdown"}
+[]{.leaderline start="#tree #left" end="#tree #upleft" path-label="up" lineid="leftup"}
+[]{.leaderline start="#tree #left" end="#tree #downleft" path-label="down" lineid="leftdown"}
+[]{.leaderline start="#you" end="#tree #left" lineid="line1" color="red" index=0 start-socket="top"}
+[]{.leaderline .setAttribute lineid="line1" end="#tree #right"  index=1}
+[]{.leaderline .setAttribute lineid="line1" action="hide"  index=2}
+
+[]{.leaderline .setAttribute lineid="rightup" color="red" index=2}
+[]{.leaderline .setAttribute lineid="leftdown" color="red" index=3}
+[]{.leaderline .setAttribute lineid="left" color="red" index=4}
+[]{.leaderline .setAttribute lineid="right" color="red" index=5}
+[]{ .leaderline  .setAttribute lineid="leftdown" index=6 end-border-style="fillColor:rgba(173, 216, 230, 0.5); color:red"  }      
+[]{ .leaderline  .setAttribute lineid="rightup" index=6 end-border-style="fillColor:rgba(255, 189, 51, 0.5); color:red"  }      
+
+[]{.leaderline start="#tree #upright"  end="#equation1 .base:nth-child(2) " draw-effect="none" end-socket="top" index=7 end-border-style="color:green; fillColor:rgba(245,40,145, 0.5)" end-plug="hand"   }
+[]{.leaderline start="#tree #downleft"  end="#equation1 .base:nth-child(1) " draw-effect="none" end-socket="top" index=7 end-border-style="color:green; fillColor:rgba(173, 216, 230, 0.5)"}
+
+
+
+- Which one do [you]{#you} prefer?[Left]{#leftText .fragment data-fragment-index=0} [or right?]{#right .fragment data-fragment-index=1} 
+
+:::{#equation1 .fragment data-fragment-index=5}
+$$
+  u(\text{left}) =  u(\text{right})
+$$
+:::
+        
+## Simple Line
+
+
+:::{.text}
+
+
+- To draw a line between two objects,
+  - generate a `span` object with class `.leaderline`.
+  - Specify the [`start`]{style="background-color:orange"} and [`end`]{style="background-color:pink"} elements at attributes.
+    - `start` and `end` must be a [CSS selector](https://www.w3schools.com/cssref/css_selectors.php).
+    - Id of the current slide is automatically added. It must not be part of these elements.
+    - `start` becomes `#id_of_current_slide  start`.
+- Basis syntax: `[]{.leaderline start="ccs_selector" end="css_selector" }`
+
+
+:::
+
+
+
+    
+
+
+:::{.sampleDisplay}
+
+:::{#box1 style="height:30%; aspect-ratio:1/1; background-color:red; position:absolute;  top:0px; right:50%;"}
+
+:::
+
+:::{#box2 style="height:30%; aspect-ratio:1/1; background-color:red; position:absolute;  bottom:0px; right:50%;"}
+
+:::
+
+
+[]{.leaderline  start="#box1" end="#box2"} 
+
+:::
+
+
+:::{.sourceCodeContainer #simpleLine}
+
+```{verbatim}
+[]{.leaderline  start="#box1" end="#box2"}        
+```  
+
+
+:::
+
+```{js}
+
+highlightCode("#simpleLine", 1, "start", "orange");
+highlightCode("#simpleLine", 1, "end", "pink");
+
+```
+
+
+
+       
+## Style of a Line
+
+
+:::{.text}
+
+- The appearance of a line can be changed by assigning attributes to `span.leaderline`.
+  - All attributes are converted to `data-*` attributes.
+    - You don't need to add `data-` to attribute names.
+  - `data-*` attributes are assigned to `setOptions` [function](https://anseki.github.io/leader-line/#setoptions) of the line.
+  - You must convert attributes with [__camelCase__](https://developer.mozilla.org/en-US/docs/Glossary/Camel_case) to [__kebab-case__](https://developer.mozilla.org/en-US/docs/Glossary/Kebab_case).
+    - For example: `startSocket` must be `start-socket`.
+- See [LeaderLine website](https://anseki.github.io/leader-line/#setoptions) for available options.
+
+:::
+
+
+
+    
+
+
+:::{.sampleDisplay}
+
+:::{#box1 style="height:30%; aspect-ratio:1/1; background-color:red; position:absolute;  top:0px; right:50%;"}
+:::
+
+:::{#box2 style="height:30%; aspect-ratio:1/1; background-color:red; position:absolute;  bottom:0px; right:50%;"}
+:::
+
+
+
+[]{.leaderline  start="#box1" end="#box2" color="green" start-socket="right" end-socket="left" size="5"} 
+
+:::
+
+
+:::{.sourceCodeContainer}
+
+```{verbatim}
+[]{.leaderline  start="#box1" end="#box2" color="green" start-socket="right" end-socket="left" size="5"} 
+```  
+
+
+:::
+
+
+## Text on a Line
+
+ 
+:::{.text}
+
+- A text can be added to a line using:
+- `path-label` or `caption-label`.
+- In LeaderLine, they correspond to [[__pathLabel__](https://anseki.github.io/leader-line/#pathLabel)]{style="background-color:orange;"} and [[__captionLabel__](https://anseki.github.io/leader-line/#captionLabel)]{style="background-color:lightblue;"}.
+- Position can be set using [`label-position`]{style="background-color:violet;"}.
+  - Possible values: `start`, `end`, `middle`(default).
+- The style of the label can be set using [`label-style`]{style="background-color:pink;"}.
+  
+:::
+
+
+
+    
+
+
+:::{.sampleDisplay}
+
+:::{#box1 style="height:30%; aspect-ratio:1/1; background-color:red; position:absolute;  top:35%; right:5%;"}
+
+:::
+
+:::{#box2 style="height:30%; aspect-ratio:1/1; background-color:red; position:absolute; top:35%; left:5%;"}
+
+:::
+
+
+[]{.leaderline  start="#box1" end="#box2" color="green" start-socket="top" end-socket="top" path-label="Label" label-style="color:orange"} 
+[]{.leaderline  start="#box1" end="#box2" color="green" start-socket="bottom" end-socket="bottom" caption-label="Caption" label-style="color:blue"  } 
+
+[]{.leaderline  start="#box1" end="#box2" color="green" start-socket="left" end-socket="right" caption-label="Position" label-position="start" label-style="color:violet" } 
+
+:::
+
+
+:::{.sourceCodeContainer #textOverLine}
+
+```{verbatim}
+[]{.leaderline  start="#box1" end="#box2" path-label="Label" color="green" start-socket="top" end-socket="top" label-style="color:orange" } 
+[]{.leaderline  start="#box1" end="#box2" caption-label="Caption" label-style="color:blue" color="green" start-socket="bottom" end-socket="bottom"   } 
+[]{.leaderline  start="#box1" end="#box2" label-position="start" label-style="color:violet" color="green" start-socket="left" end-socket="right" caption-label="Position"  } 
+```  
+
+
+:::
+
+```{js}
+
+highlightCode("#textOverLine", 1, "path-label", "orange")
+highlightCode("#textOverLine", 2, "caption-label", "lightblue")
+highlightCode("#textOverLine", 2, "label-style", "pink")
+highlightCode("#textOverLine", 3, "label-position", "violet")
+
+
+```
+    
+## Border of Target Elements
+
+
+:::{.text}
+
+- A border can be drawn around `start` or `end` elements.
+- The style of the can be defined using `start-border-style` for start element and `end-border-style` for end element.
+  - Each component is defined by `name_of_the_style:value_of_the_style`.
+  - Components are separated with a semicolon `;`.
+      - `color:red; radius:10`
+  - See [__areaAnchor__](https://anseki.github.io/leader-line/#areaanchor) of LeaderLine to check possible components.
+  
+:::
+
+:::{.sampleDisplay}
+
+:::{#box1 style="height:30%; aspect-ratio:1/1; background-color:red; position:absolute;  top:0px; right:50%;"}
+:::
+
+:::{#box2 style="height:30%; aspect-ratio:1/1; background-color:red; position:absolute;  bottom:0px; right:50%;"}
+:::
+
+
+[]{.leaderline  start="#box1" end="#box2" color="green" start-socket="right" end-socket="left" size="5" start-border-style="color:red; radius:10"} 
+
+:::
+
+
+:::{.sourceCodeContainer #borderCode}
+
+```{verbatim}
+[]{.leaderline start-border-style="color:red; radius:10"  start="#box1" end="#box2"  color="green" start-socket="right" end-socket="left" size="5" } 
+```  
+
+
+:::
+
+
+```{js}
+
+highlightCode("#borderCode", 1, 'start-border-style="color:red; radius:10"', "orange")
+
+
+```
+
+
+
+## Fragment
+
+
+:::: {.text style="z-index:100;" }
+
+::: { #fragmentText  }
+
+- A line can be drawn between any two elements.
+  - Make sure that they are on the same slide.
+- To do this, include [`index`]{style="background-color:orange;"} to specify when to show the line.
+  - Alternative is to include `fragment` class and `data-fragment-index`.   
+  - However, `fragment-index` is not working as intended, because of revealjs's default behavior. 
+  - I assign `index` to  `fragment-index` and add `fragment` class after initialization.
+- An alternative is to use [`link`]{style="background-color:pink;"} attribute to sync with another element.
+
+
+:::
+
+
+::::
+
+
+
+::: { .sampleDisplay}
+
+
+:::{#boxFragment style="height:30%; aspect-ratio:1/1; background-color:red; position:absolute; right:5%; top:35%;"}
+
+:::
+
+:::{#box1B style="height:30%; aspect-ratio:1/1; background-color:blue; position:absolute; left:5%; top:35%;"}
+
+:::
+
+[]{.leaderline   start="#boxFragment" end="#box1B" index="3" } 
+[]{.leaderline  start="#fragmentText >  ul >  li:nth-child(3) code" end="#fragmentCodeLink"
+          link="#fragmentText >  ul >  li:nth-child(3)" start-socket="bottom"
+          path='straight'} 
+
+
+:::
+
+:::{.sourceCodeContainer #fragmentCode }
+
+```{verbatim}
+[]{.leaderline index="3" start="#boxFragment" end="#box1B"  } 
+[]{.leaderline  start="#fragmentText >  ul >  li:nth-child(2) > ul > li:nth-child(3) code" end="#box1B"
+          link="#fragmentText >  ul >  li:nth-child(3)" start-socket="bottom" }    
+
+```  
+
+
+:::
+
+```{js}
+
+var list = document.querySelectorAll("#fragmentText li");
+for(i=0; i<list.length; i++){
+  list[i].classList.add("fragment");
+  list[i].dataset.fragmentIndex = i;
+}
+
+highlightCode("#fragmentCode", 1, 'index="3"', "orange", 2)
+highlightCode("#fragmentCode", 3, 'link="#fragmentText &gt;  ul &gt;  li:nth-child(3)"', "pink", 6, "fragmentCodeLink")
+
+
+```
+
+## Fragment of Parent
+
+
+
+
+
+:::: {.text }
+
+
+
+- If an arrow is defined within a  object with `fragment` class,
+  - and it does not have `index` attribute,
+  - then it will inherit the parent's fragment status.
+
+::::
+
+
+
+::: { .sampleDisplay .fragment}
+
+
+:::{#boxFragment style="height:30%; aspect-ratio:1/1; background-color:red; position:absolute; right:5%; top:35%;"}
+
+:::
+
+:::{#box1B style="height:30%; aspect-ratio:1/1; background-color:blue; position:absolute; left:5%; top:35%;"}
+
+:::
+
+[]{.leaderline   start="#boxFragment" end="#box1B"  } 
+
+:::
+
+:::{.sourceCodeContainer }
+
+```{verbatim}
+
+[]{.leaderline   start="#boxFragment" end="#box1B"  }    
+
+```  
+
+
+:::
+
+
+## Animate Drawing
+
+:::: {.text }
+- The initialization of an arrow can be animated using [`draw-effect`]{style="background-color:orange;"}.
+  - This value will be assigned to [__showEffectName__](https://anseki.github.io/leader-line/#methods-show-hide-showeffectname) of LeaderLine.    
+  - Possible values:  `fade`, `draw`, `none` (default).
+  
+::::
+
+
+
+::: { .sampleDisplay }
+
+:::{#boxFragment style="height:30%; aspect-ratio:1/1; background-color:red; position:absolute; right:5%; top:35%;"}
+:::
+
+:::{#box1B style="height:30%; aspect-ratio:1/1; background-color:blue; position:absolute; left:5%; top:35%;"}
+:::
+
+[]{.leaderline   start="#boxFragment" end="#box1B" draw-effect="draw"  index="0" } 
+
+:::
+
+:::{.sourceCodeContainer #animateDrawingCode }
+
+```{verbatim}
+[]{.leaderline draw-effect="draw" start="#boxFragment" end="#box1B"   index="0" } 
+```  
+
+
+:::
+
+```{js}
+
+
+
+highlightCode("#animateDrawingCode", 1, 'draw-effect="draw"', "orange")
+
+
+
+```
+
+
+## Changing the Style
+
+:::: {.text .incremental }
+
+- The style of a line can be changed after initializiation.
+  - The arrow was orange. [Now, it is red.]{.fragment }
+  - Any property that is defined in initialization can be changed.
+  - This includes target elements `start` and [`end`]{#target}.
+  
+::::
+
+::: { .sampleDisplay }
+
+:::{#boxFragment style="height:30%; aspect-ratio:1/1; background-color:red; position:absolute; right:5%; top:35%;"}
+:::
+
+:::{#box1B style="height:30%; aspect-ratio:1/1; background-color:blue; position:absolute; left:5%; top:35%;"}
+:::
+
+[]{.leaderline   start="#boxFragment" end="#box1B" lineid="line1" } 
+[]{.leaderline .setAttribute lineid="line1" color="red" index=2}
+[]{.leaderline .setAttribute lineid="line1" color="red" size=5 index=3}
+[]{.leaderline .setAttribute lineid="line1"  end="#target" end-socket="bottom" index=4}
+
+:::
+
+:::{.sourceCodeContainer }
+
+```{verbatim}
+[]{.leaderline   start="#boxFragment" end="#box1B" lineid="line1" } 
+[]{.leaderline .setAttribute lineid="line1" color="red" index=2}
+[]{.leaderline .setAttribute lineid="line1" color="red" size=5 index=3}
+[]{.leaderline .setAttribute lineid="line1"  end="#target" index=4}
+
+```  
+
+:::
+
+
+## Changing the Style
+
+:::: {.text #changeStyleText }
+- To do this, first the line must have a [`lineid`]{style="background-color:orange"}.
+  - Id of the current slide is attached to `lineid` automatically.
+  - Hence, the same id can be used across different slides.
+- Then, generate a `span` with `leaderline` and [`setAttribute`]{style="background-color:lightblue"} classes.
+- Specify which line will be altered by [`lineid`]{style="background-color:orange"}.
+- Specify which [styles]{style="background-color:pink"} will be changed.
+- Specify the [`index`]{style="background-color:violet"}  of fragment.
+
+:::
+
+
+
+::: { .sampleDisplay }
+
+:::{#boxFragment style="height:30%; aspect-ratio:1/1; background-color:red; position:absolute; right:5%; top:35%;"}
+:::
+
+:::{#box1B style="height:30%; aspect-ratio:1/1; background-color:blue; position:absolute; left:5%; top:35%;"}
+:::
+
+[]{.leaderline   start="#boxFragment" end="#box1B" lineid="line1" } 
+[]{.leaderline .setAttribute lineid="line1" color="red" index=2}
+[]{.leaderline .setAttribute lineid="line1" color="red" size=8 index=3 end-socket="top"}
+
+:::
+
+:::{.sourceCodeContainer #changeStyleCode }
+
+```{verbatim}
+[]{.leaderline   start="#boxFragment" end="#box1B" lineid="line1" } 
+[]{.leaderline .setAttribute lineid="line1" color="red" index=2}
+[]{.leaderline .setAttribute lineid="line1" color="red" size=5 index=3 end-socket="top"}
+
+
+```  
+
+:::
+
+```{js}
+
+var list = document.querySelectorAll("#changeStyleText li");
+for(i=0; i<list.length; i++){
+  list[i].classList.add("fragment");
+  list[i].dataset.fragmentIndex = i;
+}
+
+
+highlightCode("#changeStyleCode", 1, 'lineid="line1"', "orange", 0 );
+highlightCode("#changeStyleCode", 2, '.setAttribute', "lightblue", 3 );
+highlightCode("#changeStyleCode", 2, 'lineid="line1"', "orange", 4 );
+highlightCode("#changeStyleCode", 2, 'color="red"', "pink", 5 );
+highlightCode("#changeStyleCode", 2, 'index=2', "violet", 6 );
+ 
+
+
+```
+
+
+
+
+
+
+
+```{css}
+
+.sourceCodeContainer{ height:30%; width:60%; float:left;}
+.sourceCodeContainer .sourceCode{ height:95%; margin:auto}
+
+.text{height:50%; width:100%;}
+
+.sampleDisplay{ height:30%; width:35%; float:right; position:relative;
+right:2.5%; background-color:lightgray; border:1pt solid black;}
+
+.decTree, .decTree .cell, .decTree .cell-output-display{
+  width:100%;
+  height:100%;
+}
+
+ .decTreeInner{
+   height:100%;
+   display:flex; justify-content:center
+ }
+ 
+ .decTree .node{
+   display:flex; align-items: center;
+ } 
+ .decTree .node span{
+   margin:auto;
+ }
+ 
+.spreadContent{
+    height:100%;
+  display:flex; 
+  flex-wrap:wrap;
+  flex-direction:column; 
+  justify-content:space-evenly;
+}
+
+
+
+```
