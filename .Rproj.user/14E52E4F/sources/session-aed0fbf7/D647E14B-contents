@@ -2,6 +2,9 @@
 
 Draw a line between in your presentation using [leader-line](https://github.com/anseki/leader-line). It is a wrapper for leader-line to synchronize it with [Reveal.js](https://revealjs.com/) presentation without any coding knowledge. It converts `span` to leader-line object. All you need to know is [how to add divs and spans](https://quarto.org/docs/authoring/markdown-basics.html#sec-divs-and-spans) in your [Quarto](https://quarto.org/) document and utilize [CSS selector](https://www.w3schools.com/cssref/css_selectors.php).
 
+You may check the demo [here](https://omerfarukkoru.com/Packages/quarto-leader-line/example.html).
+
+
 ## Installing
 
 
@@ -32,7 +35,7 @@ revealjs-plugins:
   - class `leaderline`,
   - pass the id (or [CSS selector](https://www.w3schools.com/cssref/css_selectors.php)) of elements lines to be drawn between as `start` and `end` attributes.
     - Id of the slide is automatically added to CSS selectors,so you should not include it.
-    - CSS selector becomes `#slide-id css selector`. 
+    - `css_selector` becomes `#slide-id css_selector`. 
 
 ```{.markdown}
 []{.leaderline start='#element-1' end='#element-2' }
@@ -98,6 +101,18 @@ revealjs-plugins:
 ## Minimal Example
 
 ```{markdown}
+---
+title: "Leader-line Example"
+format:
+  revealjs:
+    width: 1920
+    height: 1080
+    include-in-header: 
+      - text: '<script src="https://cdnjs.cloudflare.com/ajax/libs/leader-line/1.0.7/leader-line.min.js"></script>'
+revealjs-plugins:
+  - leader-line
+---
+
 ## Leaderline
 
 :::{#box1 style="width:200px; height:200px; background-color:red; position:absolute; top:100px; left:0" }

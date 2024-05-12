@@ -12,29 +12,6 @@ revealjs-plugins:
 ---
 
 
-## Leaderline
-
-
-
-
-:::{#box1 style="width:200px; height:200px; background-color:red; position:absolute; top:100px; left:0" }
-:::
-:::{#box2 style="width:200px; height:200px; background-color:green;position:absolute; top:100px; left:400px;" }
-:::
-
-
-:::{#list .incremental style="position:absolute; top:400px"}
-
-- Here is some text.
-- You can put the [target text]{#target} within a span to select it.
-- You can point to any element you can select using CSS selector.
-
-:::
-
-[]{.leaderline start='#box1' end='#box2' start-socket='top' lineid='example'}
-[]{.leaderline start='#box2' end='#target' index=1 end-border-style='color:red;' lineid="line1"}
-[]{.leaderline start="#box2" end='#list ul li:nth-child(3)' index=2 end-socket="right"}
-[]{.leaderline .setAttribute lineid='example' color='blue' end-socket='bottom' index=0 caption-label='an arrow' label-style='color:red; fontSize:20'}
 
 ## LeaderLine
 

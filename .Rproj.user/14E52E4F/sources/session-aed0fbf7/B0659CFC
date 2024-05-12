@@ -3,7 +3,7 @@
     "path": "C:/Users/oqk5084/OneDrive - The Pennsylvania State University/Lectures/RevealJSfilters/leader-line/_extensions/leader-line/_extension.yml",
     "project_path": "_extensions/leader-line/_extension.yml",
     "type": "yaml",
-    "hash": "503080246",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1715537761913.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "0,8",
+        "cursorPosition": "10,0",
         "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1715537797,
+    "lastKnownWriteTime": 1715549516,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1715537797914,
+    "last_content_update": 1715549516775,
     "read_only": false,
     "read_only_alternatives": []
 }

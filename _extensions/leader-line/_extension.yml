@@ -7,6 +7,4 @@ contributes:
     - name: RevealLeaderline
       script:
         - reveal-leader-line.js
-      stylesheet:
-        - reveal-leader-line.css
 
