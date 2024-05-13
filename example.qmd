@@ -87,17 +87,17 @@ function highlightCode(id, line, text, color, index=-1, spanid=''){
   <div class="spreadContent levelB1" style="width:20%"></div>
   <div class="decTreeVertical level2" style="min-width:1em; max-width:20%; height:100%;">
     <div class="spreadContent level2" style="height:100%;">
-      <div class="node" id="left">Left</div>
-      <div class="node" id="right">Right</div>
+      <div class="node fragment" id="left" data-fragment-index="0" >Left</div>
+      <div class="node fragment" id="right" data-fragment-index="0">Right</div>
     </div>
   </div>
   <div class="spreadContent levelB2" style="width:20%"></div>
   <div class="decTreeVertical level3" style="min-width:1em; max-width:20%; height:100%;">
     <div class="spreadContent level3" style="height:100%;">
-      <div class="node" id="upleft">100</div>
-      <div class="node" id="downleft">300</div>
-      <div class="node" id="upright">300</div>
-      <div class="node" id="downright">100</div>
+      <div class="node fragment" id="upleft" data-fragment-index="1">100</div>
+      <div class="node fragment" id="downleft" data-fragment-index="1">300</div>
+      <div class="node fragment" id="upright" data-fragment-index="2">300</div>
+      <div class="node fragment" id="downright" data-fragment-index="2">100</div>
     </div>
   </div>
 
@@ -107,31 +107,31 @@ function highlightCode(id, line, text, color, index=-1, spanid=''){
 
 :::
 
-[]{.leaderline start="#tree #init" end="#tree #left" path="straight" lineid="left"}
-[]{.leaderline start="#tree #init" end="#tree #right" path="straight" lineid="right"}
-[]{.leaderline start="#tree #right" end="#tree #upright" path-label="up" lineid="rightup"}
-[]{.leaderline start="#tree #right" end="#tree #downright" path-label="down" lineid="rightdown"}
-[]{.leaderline start="#tree #left" end="#tree #upleft" path-label="up" lineid="leftup"}
-[]{.leaderline start="#tree #left" end="#tree #downleft" path-label="down" lineid="leftdown"}
-[]{.leaderline start="#you" end="#tree #left" lineid="line1" color="red" index=0 start-socket="top"}
-[]{.leaderline .setAttribute lineid="line1" end="#tree #right"  index=1}
-[]{.leaderline .setAttribute lineid="line1" action="hide"  index=2}
+[]{.leaderline start="#tree #init" end="#tree #left" path="straight" lineid="left" index=0}
+[]{.leaderline start="#tree #init" end="#tree #right" path="straight" lineid="right"  index=0}
+[]{.leaderline start="#tree #right" end="#tree #upright" path-label="up" lineid="rightup"  index=2}
+[]{.leaderline start="#tree #right" end="#tree #downright" path-label="down" lineid="rightdown"  index=2}
+[]{.leaderline start="#tree #left" end="#tree #upleft" path-label="up" lineid="leftup"  index=1}
+[]{.leaderline start="#tree #left" end="#tree #downleft" path-label="down" lineid="leftdown"  index=1}
+[]{.leaderline start="#you" end="#tree #left" lineid="line1" color="red" index=3 start-socket="top"}
+[]{.leaderline .setAttribute lineid="line1" end="#tree #right"  index=4}
+[]{.leaderline .setAttribute lineid="line1" action="hide"  index=5}
 
-[]{.leaderline .setAttribute lineid="rightup" color="red" index=2}
-[]{.leaderline .setAttribute lineid="leftdown" color="red" index=3}
-[]{.leaderline .setAttribute lineid="left" color="red" index=4}
-[]{.leaderline .setAttribute lineid="right" color="red" index=5}
-[]{ .leaderline  .setAttribute lineid="leftdown" index=6 end-border-style="fillColor:rgba(173, 216, 230, 0.5); color:red"  }      
-[]{ .leaderline  .setAttribute lineid="rightup" index=6 end-border-style="fillColor:rgba(255, 189, 51, 0.5); color:red"  }      
+[]{.leaderline .setAttribute lineid="rightup" color="red" index=5}
+[]{.leaderline .setAttribute lineid="leftdown" color="red" index=6}
+[]{.leaderline .setAttribute lineid="left" color="red" index=7}
+[]{.leaderline .setAttribute lineid="right" color="red" index=7}
+[]{ .leaderline  .setAttribute lineid="leftdown" index=8 end-border-style="fillColor:rgba(173, 216, 230, 0.5); color:red"  }      
+[]{ .leaderline  .setAttribute lineid="rightup" index=8 end-border-style="fillColor:rgba(255, 189, 51, 0.5); color:red"  }      
 
-[]{.leaderline start="#tree #upright"  end="#equation1 .base:nth-child(2) " draw-effect="none" end-socket="top" index=7 end-border-style="color:green; fillColor:rgba(245,40,145, 0.5)" end-plug="hand"   }
-[]{.leaderline start="#tree #downleft"  end="#equation1 .base:nth-child(1) " draw-effect="none" end-socket="top" index=7 end-border-style="color:green; fillColor:rgba(173, 216, 230, 0.5)"}
+[]{.leaderline start="#tree #upright"  end="#equation1 .base:nth-child(2) " draw-effect="none" end-socket="top" index=9 end-border-style="color:green; fillColor:rgba(245,40,145, 0.5)" end-plug="hand"   }
+[]{.leaderline start="#tree #downleft"  end="#equation1 .base:nth-child(1) " draw-effect="none" end-socket="top" index=9 end-border-style="color:green; fillColor:rgba(173, 216, 230, 0.5)"}
 
 
 
-- Which one do [you]{#you} prefer?[Left]{#leftText .fragment data-fragment-index=0} [or right?]{#right .fragment data-fragment-index=1} 
+- Which one do [you]{#you} prefer?[Left]{#leftText .fragment data-fragment-index=3} [or right?]{#right .fragment data-fragment-index=3} 
 
-:::{#equation1 .fragment data-fragment-index=5}
+:::{#equation1 .fragment data-fragment-index="8"}
 $$
   u(\text{left}) =  u(\text{right})
 $$
