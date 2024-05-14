@@ -1,6 +1,6 @@
 # Leader-line Extension For Quarto
 
-Draw a line between in your presentation using [leader-line](https://github.com/anseki/leader-line). It is a wrapper for leader-line to synchronize it with [Reveal.js](https://revealjs.com/) presentation without any coding knowledge. It converts `span` to leader-line object. All you need to know is [how to add divs and spans](https://quarto.org/docs/authoring/markdown-basics.html#sec-divs-and-spans) in your [Quarto](https://quarto.org/) document and utilize [CSS selector](https://www.w3schools.com/cssref/css_selectors.php).
+Draw a line between HTML elements in your presentation using [leader-line](https://github.com/anseki/leader-line). It is a wrapper for leader-line to synchronize it with [Reveal.js](https://revealjs.com/) presentation without any coding knowledge. It converts `span` to leader-line object. All you need to know is [how to add divs and spans](https://quarto.org/docs/authoring/markdown-basics.html#sec-divs-and-spans) in your [Quarto](https://quarto.org/) document and utilize [CSS selector](https://www.w3schools.com/cssref/css_selectors.php).
 
 You may check the demo [here](https://omerfarukkoru.com/Packages/quarto-leader-line/example.html).
 
