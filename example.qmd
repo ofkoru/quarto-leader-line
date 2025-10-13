@@ -1,5 +1,7 @@
 ---
 title: "Leader-line Example"
+execute:
+  engine: "R"
 format:
   revealjs:
     width: 1920
@@ -14,6 +16,11 @@ revealjs-plugins:
 
 
 ## LeaderLine
+
+
+```{r}
+
+```
 
 ```{js}
 
@@ -63,7 +70,7 @@ function highlightCode(id, line, text, color, index=-1, spanid=''){
 
 ::::
 
-[]{ .leaderline start="#A" end="#B"  }
+[]{.leaderline start="#A" end="#B"  }
         
 
 ## Example
@@ -72,9 +79,6 @@ function highlightCode(id, line, text, color, index=-1, spanid=''){
 :::{.decTree style="height:50%;"}
 
 
-```{r}
-
-```
 
 
 ```{=html}
@@ -500,6 +504,42 @@ highlightCode("#animateDrawingCode", 1, 'draw-effect="draw"', "orange")
 
 ```
 
+
+
+## Options
+
+:::: {.text }
+- Any attribute of the span is set as an option of the line.
+- For example, `[.leaderline ... opt1="arguments"]` is set to `line.setOptions(opt1: arguments)`.
+  - `arguments` can be an object type.
+- The following is an example for drawing animated dash line.
+  
+::::
+
+
+
+::: { .sampleDisplay }
+
+:::{#boxFragment style="height:30%; aspect-ratio:1/1; background-color:red; position:absolute; right:5%; top:35%;"}
+:::
+
+:::{#box1B style="height:30%; aspect-ratio:1/1; background-color:blue; position:absolute; left:5%; top:35%;"}
+:::
+
+[]{.leaderline   start="#boxFragment" end="#box1B" dash="{animation: true, len:20}" } 
+[]{.leaderline   start="#boxFragment" end="#box1B" start-socket="top" end-socket="top" dash="{animation: true, len:2}" } 
+
+:::
+
+:::{.sourceCodeContainer #animateDrawingCode }
+
+```{verbatim}
+[]{.leaderline   start="#boxFragment" end="#box1B" dash="{animation: true, len:20}" } 
+[]{.leaderline   start="#boxFragment" end="#box1B" start-socket="top" end-socket="top" dash="{animation: true, len:2}" } 
+```  
+
+
+:::
 
 ## Changing the Style
 

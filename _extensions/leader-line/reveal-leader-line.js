@@ -20,17 +20,18 @@ function revealleaderlineinit(Reveal){
   startSocket:"auto"
 }
 
-// convert integers to number
-function convertIntObj(obj) {
-  const res = {}
-  for (const key in obj) {
-    res[key] = {};
-      const parsed = parseFloat(obj[key]);
-      res[key] = isNaN(parsed) ? obj[key] : parsed;
-    }
-
-  return res;
-}
+  // convert integers to number
+  function convertIntObj(obj) {
+    const res = {}
+    for (const key in obj) {
+      res[key] = {};
+        //const parsed = parseFloat(obj[key]);
+        //res[key] = isNaN(parsed) ? obj[key] : parsed;
+        res[key] = obj[key];
+      }
+  
+    return res;
+  }
 
 function convertToCamelCase(inputString) {
     return inputString.split('-')
@@ -62,6 +63,7 @@ function convertAttributesToData(element) {
   // parse style
   function parseStyle(style){
     let output = {};
+    
     style = style.trim();
     if(style[0]==="{"){
       style= style.replace(/^\{|\}$/g, '');  
@@ -94,7 +96,7 @@ function convertAttributesToData(element) {
 
     })
     return output;
-  }
+    }
 
 
 function retrieveBorder(df, type="start"){
@@ -251,8 +253,10 @@ window.addEventListener('load', function() {
     
     // set options
     for(key in df){
-        let value= parseStyle(df[key]);
-        line[key] = value;
+        if(key!= start | key!= end){
+          let value= parseStyle(df[key]);
+          line[key] = value;
+        }
     } 
     addText(df,line);
     d.setAttribute("data-line-index", line._id);
