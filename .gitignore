@@ -1,2 +1,14 @@
 *.html
 *_files/
+
+# R and RStudio files to ignore
+.Rproj.user/
+*.Rproj
+.Rhistory
+.RData
+.Ruserdata
+
+# Optional: if you use OneDrive
+~$*
+Thumbs.db
+.DS_Store

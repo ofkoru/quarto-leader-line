@@ -59,23 +59,43 @@ function convertAttributesToData(element) {
 }
 
 
-// parse style
-function parseStyle(style){
-  let output = {};
-  style = style.trim();
-  style.split(';').forEach( s =>{
-    let parts = s.split(':');
-    if(parts.length===2){
-      parts[1] = parts[1].trim();
-      if(/^\d+$/.test(parts[1])){
-        output[parts[0].trim()] = Number.isInteger(parts[1]) ? parseInt(parts[1]) : parseFloat(parts[1]);
-      } else{
-        output[parts[0].trim()] = parts[1];
-      }
+  // parse style
+  function parseStyle(style){
+    let output = {};
+    style = style.trim();
+    if(style[0]==="{"){
+      style= style.replace(/^\{|\}$/g, '');  
     }
-  })
-  return output;
-}
+
+    //style.split(';').forEach( s =>{
+    style.split(/[,;](?![^{]*})/).forEach( s =>{
+      // split only on the first colon
+      const idx = s.indexOf(':');
+
+        let value = s.slice(idx + 1).trim();
+        if (value[0]==="{"){
+          value = parseStyle(value);
+          } else{
+            if(/^\d+$/.test(value)){
+              value = Number.isInteger(value) ? parseInt(value) : parseFloat(value);
+            } else   if (value === 'true' || value === 'false') {
+               value = value === 'true';
+                }
+              else {
+             // output[key] = value;
+            }
+          }
+          if (idx !== -1) {
+            const key = s.slice(0, idx).trim();
+            output[key] = value;
+          } else{
+            output=value;
+          }
+
+    })
+    return output;
+  }
+
 
 function retrieveBorder(df, type="start"){
   if (typeof df[type] === 'object'){
@@ -230,7 +250,10 @@ window.addEventListener('load', function() {
           );
     
     // set options
-    line.setOptions(df);
+    for(key in df){
+        let value= parseStyle(df[key]);
+        line[key] = value;
+    } 
     addText(df,line);
     d.setAttribute("data-line-index", line._id);
     if(df.lineid!==undefined){
