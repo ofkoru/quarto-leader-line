@@ -263,7 +263,13 @@ window.addEventListener('load', function() {
     if(df.lineid!==undefined){
       line.lineid=df.lineid;
       leaderline_attributes_history[df.lineid] = [];
+      document.querySelector("svg.leader-line:has(#leader-line-" + line._id +"-line-path").id = df.lineid;
     }
+    
+    if (df.lineclass!==undefined){
+      document.querySelector("svg.leader-line:has(#leader-line-" + line._id +"-line-path").classList.add(df.lineclass);
+    }
+
     if( df.link!=undefined ){
       var linkedObj = document.querySelector(df.link);
       if(linkedObj.classList.contains("fragment")){
